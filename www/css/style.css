@@ -1,0 +1,208 @@
+#loading-indicator {
+	position: absolute;
+	margin-top: 50%;
+	margin-left: 50%;
+	width: 150px;
+}
+/*-----------*
+				**	HEADEAR **
+									*------------*/
+.img{
+	width: 50%;
+	height: 50%;
+}
+
+.title-img{
+	width: 50%;
+	height: 20%;	
+	margin: 30px;
+}
+
+.navigation-bar{
+	width: 65%;
+}
+
+.nav-justified {
+  width: 100%;
+}
+
+.nav-justified > li {
+  float: none;
+  display: table-cell;
+  width: 1%;
+}
+
+.nav-justified > li > a {
+  margin-bottom: 5px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+
+
+/*-------------*
+					**	MAIN PAGE **
+										*-------------*/
+.main-page-div{
+	width: 65%;
+	margin-top: -21px;
+	border-left: 1px solid #dddddd;
+	border-right: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	overflow: hidden;
+	min-height: 400px;
+}
+
+.main-div{
+	min-height: 400px;
+	margin-top: 40px;
+	margin-bottom: 30px;
+	background: #f8f8f8;
+	border: 1px solid #e7e7e7;
+	border-radius: 10px;
+	overflow: hidden;
+	padding: 20px;
+}
+
+
+.form-control{
+	width: 90%;
+	margin: 1%;
+}
+
+
+/*----------------------*
+**	FILTER SELECTION SESSION **
+*----------------------*/
+
+/* Div */
+.filter-selection{
+	float: right;
+	padding: 10px;
+	border-left: 1px solid #e7e7e7;
+}
+
+.patient-id{
+	margin-top: 20px;
+}
+
+.filter-gene-form{
+	overflow: hidden;
+	text-align: left;
+	margin-bottom: 5%;
+}
+
+.form-first-column{
+	float: left;
+}
+
+.form-second-column{
+	float: right;
+}
+
+#gene-filter{
+	text-align: left;
+}
+
+
+/*---------------------------*
+** GENE INPUT SESSION **
+*---------------------------*/
+
+.gene-input{
+	float: left;
+	padding: 10px;
+}
+
+
+.div-filters{
+	text-align: left;
+}
+
+#americanAge, #europeanAge{
+	margin-left: 50px;
+}
+
+
+
+
+/*-------------*
+					**	GENERAL TAGS **
+										*-------------*/
+
+
+h4{
+	color: lightblue;
+	font-weight: bold;
+}
+
+.center{
+	margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/*-------------*
+					**	CREATE DIV WITH TITLE **
+													*-------------*/
+
+.select-filter{
+	margin: 50px;
+    border: 1px solid #e7e7e7;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.div-title{
+    text-align: center;
+    margin-top: -30px;
+    margin-left: 5px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 15px;
+    width: 20%
+}
+
+.div-text-title{
+    background-color: white;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+}
+
+
+
+
+/*-------------*
+					**	BOXPLOT PAGE **
+										*-------------*/
+
+
+.chosen-data{
+	width: 70%;
+	overflow: hidden;
+}
+
+.boxplot-options{
+	text-align: left;
+	padding: 10px;
+	border: 1px solid #e7e7e7;
+	border-radius: 10px;
+}
+
+.bp-style{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+/*-------------*
+					**	ABOUT PAGE **
+										*-------------*/
+.about-txt{
+	text-align: left;
+	text-indent: 50px;
+
+}

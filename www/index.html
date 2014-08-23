@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+	<head>
+		<title>MAGIC</title>
+
+		<!-- jQuery -->
+		<script src="js/jquery.js" type="text/javascript"></script>
+		
+
+		<!-- Shiny -->
+		<script src="js/shiny.js" type="text/javascript"></script>
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+		<script src="js/bootstrap/bootstrap.min.js"></script>
+		<link href="css/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+
+		<!-- Datatable -->
+		<script src="js/datatables/jquery.dataTables.min.js"></script>
+		<link href="css/datatables/css/DT_bootstrap.css" rel="stylesheet" />
+		<script src="js/datatables/DT_bootstrap.js"></script>
+	
+		<!-- My Style -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<!-- My Javascript -->
+		<script src="js/onreadFunctions.js"type="text/javascript"></script>
+		<script src="js/globalVariables.js"type="text/javascript"></script>
+		<script src="js/functions.js"type="text/javascript"></script>
+
+		<div class="row-fuild">
+
+			<div class="img span12 offset6">
+				<img class="title-img" src="img/MAGIC_logo.png">
+			</div>
+
+			<div class="navigation-bar span12 offset3">
+				<ul class="nav nav-tabs nav-justified" id="myTab">
+			    	<li class="active" ><a href="#home" data-toggle="tab">Home</a></li>
+			    	<li ><a href="#about" data-toggle="tab">About</a></li>
+			        <li style="display: none;"><a href="#boxplot" data-toggle="tab">Boxplot</a></li>
+			        <li style="display: none;"><a href="#data" data-toggle="tab">Data</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+	</head>
+	<body>
+		<div class="tab-content main-page-div span12 offset3">
+			
+			<!-- Home Page -->
+			<div class="tab-pane active" id="home">
+				<div class="row-fluid">
+
+					<div class="main-div span10 offset1">
+
+						<!-- Gene Input -->
+				    	<div class="gene-input span6">
+				    		<h4 class="text-center">Gene Input</h4>
+
+				    		<div id="gene-filter" class="select-filter span12">
+								<h1 class="div-title">
+									<p class="div-text-title">Filter Gene</p>
+								</h1>
+
+								<div  class="control-group div-gene">
+								  <p class="control-label" ><b>Gene: </b></p>
+								  <textarea type="text" class="form-control" id="geneInput" placeholder="Insert the gene(s) ..."></textarea>
+								</div>
+
+								<div class="alert alert-danger fade in" id="geneAlert" style="display: none;">
+							      <p id="alertGene"></p>
+							    </div>
+
+								<div class="control-group patient-id">
+									<input type="checkbox" id="patientid" value=""> Patient ID <br>
+									<textarea id="patientidTextarea" rows="4" cols="50" class="form-control" style="display: none;" placeholder="Insert the patient(s) id(s) ..."></textarea>
+								</div>
+
+								<div class="alert alert-danger fade in" id="patientAlert" style="display: none;">
+									<p id="alertPatient"></p>
+							    </div>
+							</div>
+				    	</div>
+
+						<!-- Filter Selection -->
+				    	<div class="filter-selection span6">
+							<h4 class="text-center">Filter Selection</h4>
+
+							<div class="div-filters"></div>
+
+							<div class="filtersBtn offset3">
+								<button id="addFilterBtn" type="button" class="btn btn-default" disabled>Add new filter</button>
+								<button id="resetFilterBtn" type="button" class="btn btn-default" disabled >Reset</button>
+							</div>
+						</div>	
+					</div>
+
+				</div>
+		
+				<ul class="pager">
+					<!-- href="#myModal" data-toggle="modal" -->
+				  <li><a id="plotBtn"  style="display: none;" href="#myModal" data-toggle="modal">Plot</a></li>
+				</ul>
+			</div>
+
+			<!-- About Page  -->
+			<div class="tab-pane" id="about">
+		    	<div class="row-fluid">
+			    	<div class="main-div span10 offset1">
+			    		<div class="about-txt">
+				    		<p><b>MAGIC</b> portal is an application for genomic analyses of pediatric medulloblastoma samples obtained from the international medulloblastoma consortium.</p>
+				    		<p>The application plot boxplot based on the input data. Magic portal allows to insert any amount of gene and patient id. The program also permits to filter the data in accordance with the sample <b>subgroup, tissue type, gender and age</b>.</p>
+				    		<p>The gene input field is based on Ensembl database v62 which contains the <b>Ensembl Gene Id, Associated Gene Name, HGNC Symbol, UCSC Id and Refseq Ids (DNA, Predicted DNA, Protein, Predicted Protein, and Genomic)</b></p>
+				    		<p>In the filter selection section, the class correspond to the x axis of the boxplot while the other filters are used to filter the data. The first filter after the class has an options <b>plot for each option</b>. This options permit to split the boxplot, ploting one boxplot for each selected option(s).</p>
+				    		<p>Finaly, the application also show the data used in the plot, showing a table that contains the Tissue Id, Patient Id, the selected filters and the inserted gene.</p>
+				    		<br>
+
+							<p><b>Software Operation:</b></p>
+							<p>	1 - Insert one gene per line;</p>
+							<p>	2 - Insert one patient id per line (optional);</p>
+							<p>	3 - Select a class;</p>
+							<p>	4 - Add filters (optional);</p>
+							<p>	5 - Click at Plot button.</p>
+			    		</div>
+		    		</div>
+		    	</div>
+			</div>
+		    
+			<!-- Tab Boxplot -->
+		    <div class="tab-pane" id="boxplot">
+		    	<div class="row-fluid">
+
+			    	<div class="main-div span10 offset1">
+
+			    		<div class="chosen-data span10 offset1">
+			    			<p><b>Gene(s)</b></p>
+			    			<div id="geneData" class="shiny-html-output"></div>
+			    			<br>
+			    			<p><b>Patient(s) ID(s)</b></p>
+			    			<div id="patientidData" class="shiny-html-output"></div>
+			    			<br>
+			    			<p><b>Selected Filter(s)</b></p>
+			    			<div id="filterData" class="shiny-html-output"></div>
+			    			<br>
+			    			
+			    			<p><b>Boxplot ptions</b></p>
+							<div class="boxplot-options">
+								<input type="checkbox" id="notch" value=""> Add notches <br><br>
+								<input type="checkbox" id="varwidth" value=""> Variable width boxes (Widths of boxes are proportional to square-roots of the number of observations) <br>
+							</div>
+			    		</div>
+
+			    		<br>
+
+
+			    		<div id="plot" class="shiny-plot-output bp-style span10" ></div>
+
+			    		<br>
+
+			    		<a id="downloadBoxplotPDF" class="btn btn-large shiny-download-link offset4" href="" target="_blank">
+			            	<i class="icon-download-alt"></i>
+			            	Download pdf-file
+			            </a>
+			    	</div>
+
+		    	</div>
+			</div>
+
+
+		   	<!-- Tab Data -->
+		    <div class="tab-pane" id="data">
+		       	<div class="row-fluid">
+
+			    	<div class="main-div span10 offset1">
+			    		<div id="dataTable" class="shiny-datatable-output"></div>
+			    		<br>
+			    		<a id="downloadDataTXT" class="btn btn-large shiny-download-link offset4" href="" target="_blank">
+			            	<i class="icon-download-alt"></i>
+			             	Download txt-file
+			            </a>
+		    		</div>
+		  		</div>
+		    </div>
+
+			<ul class="pager">
+				  <li ><a id="newPlot" style="display: none;" href="#">New Plot</a></li>
+			</ul>
+		</div>
+
+
+		<!-- Loading modal. This modal is shown in the momment the user click on Plot. It is only hidden when the data are already read. -->
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<img class="center" src="img/ajax-loader.gif" id="loading-indicator"/>
+		</div>
+
+
+	</body>
+</html>
