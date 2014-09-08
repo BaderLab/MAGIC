@@ -43,7 +43,7 @@ shinyServer(function(input, output, session) {
 		genes <- strsplit(input$geneInput, "\n")
 		ensemblIDArray <- NULL
 		for(i in 1:length(genes[[1]])){
-			ensemblID <- which (bioMart_table == genes[[1]][i], arr.ind=TRUE)
+			ensemblID <- which (bioMart_table == tolower(genes[[1]][i]), arr.ind=TRUE)
 			ensemblIDArray <- c(ensemblIDArray, as.character(bioMart_table[ensemblID[1],1]))
 		}
 
