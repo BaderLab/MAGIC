@@ -6,7 +6,6 @@
 		<!-- jQuery -->
 		<script src="js/jquery.js" type="text/javascript"></script>
 		
-
 		<!-- Shiny -->
 		<script src="js/shiny.js" type="text/javascript"></script>
 
@@ -15,19 +14,23 @@
 		<script src="js/bootstrap/bootstrap.min.js"></script>
 		<link href="css/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
 
+		<!-- More jquery -->
+		<script src="js/jquery-ui.js" type="text/javascript"></script>
+
 		<!-- Datatable -->
 		<script src="js/datatables/jquery.dataTables.min.js"></script>
 		<link href="css/datatables/css/DT_bootstrap.css" rel="stylesheet" />
 		<script src="js/datatables/DT_bootstrap.js"></script>
 	
 		<!-- My Style -->
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">	
+		<link rel="stylesheet" type="text/css" href="css/style.css">			
 
 		<!-- My Javascript -->
 		<script src="js/onreadFunctions.js"type="text/javascript"></script>
 		<script src="js/globalVariables.js"type="text/javascript"></script>
 		<script src="js/functions.js"type="text/javascript"></script>
-
+		
 		<div class="row-fuild">
 
 			<div class="img span12 offset6">
@@ -39,6 +42,7 @@
 			    	<li class="active" ><a href="#home" data-toggle="tab">Home</a></li>
 			    	<li ><a href="#about" data-toggle="tab">About</a></li>
 			        <li style="display: none;"><a href="#boxplot" data-toggle="tab">Boxplot</a></li>
+					<li style="display: none;"><a id="tab-heatmap" href="#heatmap" data-toggle="tab">Heatmap</a></li>
 			        <li style="display: none;"><a href="#data" data-toggle="tab">Data</a></li>
 				</ul>
 			</div>
@@ -48,7 +52,6 @@
 	</head>
 	<body>
 		<div class="tab-content main-page-div span12 offset3">
-			
 			<!-- Home Page -->
 			<div class="tab-pane active" id="home">
 				<div class="row-fluid">
@@ -64,18 +67,29 @@
 									<p class="div-text-title">Filter Gene</p>
 								</h1>
 
-								<div  class="control-group div-gene">
+								<div class="control-group div-gene alterable">
 								  <p class="control-label" ><b>Gene: </b></p>
-								  <textarea type="text" class="form-control" id="geneInput" placeholder="Insert the gene(s) ..."></textarea>
+								  <textarea type="text" class="form-control alterable" id="geneInput" placeholder="Insert the gene(s) ..."></textarea>
 								</div>
 
 								<div class="alert alert-danger fade in" id="geneAlert" style="display: none;">
 							      <p id="alertGene"></p>
 							    </div>
+								
+								<div class="control-group">
+									<p class="control-label" ><b>Data: </b></p>
+									<!--<input title="If unchecked, DESeq normalized data will be plotted" type="checkbox" id="plotRPKM" value=""> Plot RPKM Data <br>-->
+									<div class="first-radio alterable">
+										<input type="radio" name="dataSource" class="alterable" value="rpkm" checked="checked">RPKM
+									</div>
+									<div class="second-radio alterable">
+										<input type="radio" name="dataSource" class="alterable" value="deseq">DESeq Normalized
+									</div>
+								</div>
 
-								<div class="control-group patient-id">
-									<input type="checkbox" id="patientid" value=""> Patient ID <br>
-									<textarea id="patientidTextarea" rows="4" cols="50" class="form-control" style="display: none;" placeholder="Insert the patient(s) id(s) ..."></textarea>
+								<div class="control-group patient-id alterable">
+									<input type="checkbox" id="patientid" value="" class="alterable"> Patient ID <br>
+									<textarea id="patientidTextarea" rows="4" cols="50" class="form-control alterable" style="display: none;" placeholder="Insert the patient(s) id(s) ..."></textarea>
 								</div>
 
 								<div class="alert alert-danger fade in" id="patientAlert" style="display: none;">
@@ -88,20 +102,20 @@
 				    	<div class="filter-selection span6">
 							<h4 class="text-center">Filter Selection</h4>
 
-							<div class="div-filters"></div>
+							<div class="div-filters alterable"></div>
 
-							<div class="filtersBtn offset3">
+							<div class="filtersBtn offset3 alterable">
 								<button id="addFilterBtn" type="button" class="btn btn-default" disabled>Add new filter</button>
 								<button id="resetFilterBtn" type="button" class="btn btn-default" disabled >Reset</button>
 							</div>
 						</div>	
 					</div>
-
+					
 				</div>
-		
+								
 				<ul class="pager">
 					<!-- href="#myModal" data-toggle="modal" -->
-				  <li><a id="plotBtn"  style="display: none;" href="#myModal" data-toggle="modal">Plot</a></li>
+				  <li><a id="plotBtn"  style="display: none;">Plot</a></li>
 				</ul>
 			</div>
 
@@ -111,14 +125,14 @@
 			    	<div class="main-div span10 offset1">
 			    		<div class="about-txt">
 				    		<p><b>MAGIC</b> portal is an application for genomic analyses of pediatric medulloblastoma samples obtained from the international medulloblastoma consortium.</p>
-				    		<p>The application plot boxplot based on the input data. Magic portal allows to insert any amount of gene and patient id. The program also permits to filter the data in accordance with the sample <b>subgroup, tissue type, gender and age</b>.</p>
-				    		<p>The gene input field is based on Ensembl database v62 which contains the <b>Ensembl Gene Id, Associated Gene Name, HGNC Symbol, UCSC Id and Refseq Ids (DNA, Predicted DNA, Protein, Predicted Protein, and Genomic)</b></p>
-				    		<p>In the filter selection section, the class correspond to the x axis of the boxplot while the other filters are used to filter the data. The first filter after the class has an options <b>plot for each option</b>. This options permit to split the boxplot, ploting one boxplot for each selected option(s).</p>
-				    		<p>Finaly, the application also show the data used in the plot, showing a table that contains the Tissue Id, Patient Id, the selected filters and the inserted gene.</p>
+				    		<p>The application plots boxplots and heatmaps based on the input data. The MAGIC portal allows users to insert any number of genes and patient ids, and then it will filter out which samples have the selected <b>subgroup, tissue type, gender and age</b> to include in the plots.</p>
+				    		<p>The gene input field is based on the Ensembl v75 database, and will accept <b>Ensembl Gene Ids, Associated Gene Names, HGNC Symbols, and Entrez Gene Ids</b></p>
+				    		<p>In the filter selection section, the class corresponds to the x axis of the boxplot while the other filters are used to filter the data. The first filter after the class has an option "<b>plot for each option</b>" which will split the boxplots, and plot one for each of the selected filter option(s).</p>
+				    		<p>Finaly, the application also shows the data used in the plot, with the option to download the selected data. An additional table containing the Tissue Id, Patient Id, the selected filters and the inserted gene is also displayed on the Data Tab.</p>
 				    		<br>
 
 							<p><b>Software Operation:</b></p>
-							<p>	1 - Insert one gene per line;</p>
+							<p>	1 - Insert the genes you wish to plot;</p>
 							<p>	2 - Insert one patient id per line (optional);</p>
 							<p>	3 - Select a class;</p>
 							<p>	4 - Add filters (optional);</p>
@@ -130,10 +144,13 @@
 		    
 			<!-- Tab Boxplot -->
 		    <div class="tab-pane" id="boxplot">
-		    	<div class="row-fluid">
-
+		    	<div class="row-fluid">			
+				
 			    	<div class="main-div span10 offset1">
-
+						<div id="warningArea" class="warning-alert fade in" style="display:none;">
+							<p id="warningMessage" class="warning-message"></p>
+						</div>
+					
 			    		<div class="chosen-data span10 offset1">
 			    			<p><b>Gene(s)</b></p>
 			    			<div id="geneData" class="shiny-html-output"></div>
@@ -144,11 +161,16 @@
 			    			<p><b>Selected Filter(s)</b></p>
 			    			<div id="filterData" class="shiny-html-output"></div>
 			    			<br>
+							<p><b>Data Source</b></p>
+							<div id="dataSourceData" class="shiny-html-output"></div>
+							<br>
 			    			
-			    			<p><b>Boxplot ptions</b></p>
+			    			<p><b>Boxplot Options</b></p>
 							<div class="boxplot-options">
 								<input type="checkbox" id="notch" value=""> Add notches <br><br>
-								<input type="checkbox" id="varwidth" value=""> Variable width boxes (Widths of boxes are proportional to square-roots of the number of observations) <br>
+								<input type="checkbox" id="varwidth" value=""> Variable width boxes (Widths of boxes are proportional to square-roots of the number of observations) <br><br>
+								<input type="checkbox" id="outliers" value="" checked> Display Outliers <input type="checkbox" id="logscale" value=""> Plot  with log scale<br><br>
+								<div id="pvalue-checkbox" style="display: none;"><input type="checkbox" id="pvalues" name="pvalues" value="" checked> Display table of p Values<br></div>
 							</div>
 			    		</div>
 
@@ -172,29 +194,88 @@
 		   	<!-- Tab Data -->
 		    <div class="tab-pane" id="data">
 		       	<div class="row-fluid">
-
 			    	<div class="main-div span10 offset1">
-			    		<div id="dataTable" class="shiny-datatable-output"></div>
-			    		<br>
-			    		<a id="downloadDataTXT" class="btn btn-large shiny-download-link offset4" href="" target="_blank">
+						<h4 class="text-center">Plot Data</h4>
+						
+						<p>
+							Click the button below for a tab delimited text file of all data used for the plots. This is a subset of the entire set of data, filtered based on the values entered on the first page.
+						</p>
+						<br>						
+			    		<a id="downloadDataTXT" class="btn btn-large shiny-download-link offset4" href="" target="_blank" title="Download the full dataset used in the plots as a tab delimited text file.">
 			            	<i class="icon-download-alt"></i>
-			             	Download txt-file
+			             	Download Full Dataset
 			            </a>
+					</div>
+					<br>
+			    	<div class="main-div span10 offset1">
+						<h4 class="text-center">Clinical Data</h4>
+						<div id="dataTable" class="shiny-datatable-output"></div>
 		    		</div>
 		  		</div>
 		    </div>
+			
+			<!-- Tab Heatmap -->
+			<div class="tab-pane" id="heatmap">
+				<div class="row-fluid">
+					<div class="main-div span10 offset1">
+						<div id="heatmapWarningArea" class="warning-alert fade in" style="display:none;">
+							<p id="heatmapErrorMessage" class="shiny-text-output warning-message" style="display:none;"></p> 
+						</div>
+					
+						
+						<div class="chosen-data span10 offset1 toggle-on-error" style="float:none;">
+							<p><b>Gene(s)</b></p>
+			    			<div id="hm_geneData" class="shiny-html-output"></div>
+			    			<br>
+			    			<p><b>Patient(s) ID(s)</b></p>
+			    			<div id="hm_patientidData" class="shiny-html-output"></div>
+			    			<br>
+			    			<p><b>Selected Filter(s)</b></p>
+			    			<div id="hm_filterData" class="shiny-html-output"></div>
+			    			<br>
+							<p><b>Data Source</b></p>
+							<div id="hm_dataSourceData" class="shiny-html-output"></div>
+							<br>
+						
+			    			<p class="toggle-on-error"><b>Heatmap Options</b></p>
+							<div class="boxplot-options toggle-on-error">
+								<input type="checkbox" id="scaleRow" value="" checked> Scale Heatmap by Row
+							</div>
+			    		</div>
+			    		
+						<br>
+
+						<div id="heatmapLegend" class="shiny-plot-output hm-legend-style toggle-on-error"></div>
+						<br>
+						<div id="heatmapPlot" class="shiny-plot-output hm-style toggle-on-error" ></div>
+						<br>
+
+						<div class="download-btn toggle-on-error">
+							<a id="downloadHeatMapPDF" class="btn btn-large shiny-download-link offset4" href="" target="_blank">
+								<i class="icon-download-alt"></i>
+								Download pdf-file
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
 
 			<ul class="pager">
 				  <li ><a id="newPlot" style="display: none;" href="#">New Plot</a></li>
 			</ul>
 		</div>
-
-
-		<!-- Loading modal. This modal is shown in the momment the user click on Plot. It is only hidden when the data are already read. -->
+		
+		
+		<!-- Loading modal. This modal is shown in the momment the user click on Plot. It is only hidden when the data has been already read. -->
 		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 			<img class="center" src="img/ajax-loader.gif" id="loading-indicator"/>
 		</div>
 
 
 	</body>
+	
+	<div id="alertDialog" style="display: none;" title="Error/Warning Message">
+		<p id="alertMessage"></p>
+	</div>
 </html>

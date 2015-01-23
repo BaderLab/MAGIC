@@ -72,6 +72,23 @@
 	margin: 1%;
 }
 
+input[type=radio]{
+	vertical-align: middle;
+	margin-top:-1px;
+}
+
+.first-radio{
+	margin-right:5%; 
+	float:left; 
+	width:auto; 
+	display:inline;
+}
+
+.second-radio{
+	width:auto;
+	display:inline;
+}
+
 
 /*----------------------*
 **	FILTER SELECTION SESSION **
@@ -144,6 +161,29 @@ h4{
     text-align: center;
 }
 
+.warning-alert{
+	border-radius: 5px;
+	width: 95%;
+	border: 1px solid;
+	margin-left: auto;
+    margin-right: auto;
+	color: #9F6000;
+	background-color: #FEEFB3;
+}
+
+.warning-message{
+	text-align:justify;
+	padding: 10px;
+	text-wrap:normal;
+	word-wrap:normal;
+}
+
+.chosen-data{
+	width: 70%;
+	overflow: hidden;
+}
+
+
 /*-------------*
 					**	CREATE DIV WITH TITLE **
 													*-------------*/
@@ -163,13 +203,19 @@ h4{
     height: 20px;
     line-height: 20px;
     font-size: 15px;
-    width: 20%
+    padding-left:5px;
+    padding-right:5px;
+    display:inline;
 }
 
 .div-text-title{
     background-color: white;
     border: 1px solid #e7e7e7;
     border-radius: 10px;
+    white-space:nowrap;
+    display:inline;
+    padding-left:5px;
+    padding-right:5px;
 }
 
 
@@ -180,10 +226,6 @@ h4{
 										*-------------*/
 
 
-.chosen-data{
-	width: 70%;
-	overflow: hidden;
-}
 
 .boxplot-options{
 	text-align: left;
@@ -197,6 +239,24 @@ h4{
 	margin-bottom: 20px;
 }
 
+/*-------------*
+					**	HEATMAP PAGE **
+											*-------------*/
+
+.heatmap-options{
+	text-align: left;
+	padding: 10px;
+	border: 1px solid #e7e7e7;
+	border-radius: 10px;
+}
+
+.hm-style{
+	overflow:visible;
+}
+
+.download-btn{
+	white-space: nowrap;
+}
 
 /*-------------*
 					**	ABOUT PAGE **
